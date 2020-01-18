@@ -1,0 +1,78 @@
+name: Terraform-Plan
+
+on:
+  pull_request:
+    paths:
+    - 'terraform/**'
+    types:
+    - opened
+    - edited
+    - reopened
+    - synchronize
+    
+env:
+  TF_ACTIONS_VERSION: '0.12.18'
+  TF_ACTIONS_WORKING_DIR: './terraform'
+   
+jobs:
+  Plan-for-AWS:
+    runs-on: ubuntu-latest
+    steps:
+      - name: pull
+        uses: actions/checkout@v1
+
+      - name: terraform-format
+        uses: canelkatmis/terraform-github-actions@v0.6.4
+        with:
+          tf_actions_subcommand:  'fmt'
+          tf_actions_version:     ${{ env.TF_ACTIONS_VERSION }}
+          tf_actions_working_dir: ${{ env.TF_ACTIONS_WORKING_DIR }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          AWS_ACCESS_KEY_ID:      ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY:  ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+
+      - name: terraform-init
+        uses: canelkatmis/terraform-github-actions@v0.6.4
+        with:
+          tf_actions_subcommand:  'init'
+          tf_actions_version:     ${{ env.TF_ACTIONS_VERSION }}
+          tf_actions_working_dir: ${{ env.TF_ACTIONS_WORKING_DIR }}
+          tf_actions_cli_credentials_token: ${{ secrets.TF_ACTION_TFE_TOKEN }}
+        env:
+          GITHUB_TOKEN:           ${{ secrets.GITHUB_TOKEN }}
+
+      - name: terraform-validate
+        uses: canelkatmis/terraform-github-actions@v0.6.4
+        with:
+          tf_actions_subcommand:  'validate'
+          tf_actions_version:     ${{ env.TF_ACTIONS_VERSION }}
+          tf_actions_working_dir: ${{ env.TF_ACTIONS_WORKING_DIR }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: terraform-plan
+        uses: canelkatmis/terraform-github-actions@v0.6.4
+        if: github.event.pull_request.title != 'terraform destroy'
+        with:
+          tf_actions_subcommand:  'plan'
+          tf_actions_version:     ${{ env.TF_ACTIONS_VERSION }}
+          tf_actions_working_dir: ${{ env.TF_ACTIONS_WORKING_DIR }}
+          tf_actions_cli_credentials_token: ${{ secrets.TF_ACTION_TFE_TOKEN }}
+        env:
+          GITHUB_TOKEN:           ${{ secrets.GITHUB_TOKEN }}
+          AWS_ACCESS_KEY_ID:      ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY:  ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+
+      - name: terraform-plan-destroy
+        uses: canelkatmis/terraform-github-actions@v0.6.4
+        if: github.event.pull_request.title == 'terraform destroy'
+        with:
+          tf_actions_subcommand:  'plan -destroy'
+          tf_actions_version:     ${{ env.TF_ACTIONS_VERSION }}
+          tf_actions_working_dir: ${{ env.TF_ACTIONS_WORKING_DIR }}
+          tf_actions_cli_credentials_token: ${{ secrets.TF_ACTION_TFE_TOKEN }}
+        env:
+          GITHUB_TOKEN:           ${{ secrets.GITHUB_TOKEN }}
+          AWS_ACCESS_KEY_ID:      ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY:  ${{ secrets.AWS_SECRET_ACCESS_KEY }}
