@@ -1,0 +1,72 @@
+name: Terraform-Apply
+
+on:
+  pull_request:
+    paths:
+    - 'terraform/**'
+    types:
+      - closed
+env:
+  TF_ACTIONS_VERSION: '0.12.18'
+  TF_ACTIONS_WORKING_DIR: './terraform'
+
+jobs:
+  Apply-to-AWS:
+    if: github.event.pull_request.merged == true        
+    runs-on: ubuntu-latest
+
+    steps:     
+      - name: pull
+        uses: actions/checkout@v1
+        
+      - name: terraform-init
+        uses: canelkatmis/terraform-github-actions@v0.6.4
+        with:
+          tf_actions_subcommand:  'init'
+          tf_actions_version:     ${{ env.TF_ACTIONS_VERSION }}
+          tf_actions_working_dir: ${{ env.TF_ACTIONS_WORKING_DIR }}
+          tf_actions_cli_credentials_token: ${{ secrets.TF_ACTION_TFE_TOKEN }}
+        env:
+          GITHUB_TOKEN:           ${{ secrets.GITHUB_TOKEN }}
+          AWS_ACCESS_KEY_ID:      ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY:  ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          
+      - name: terraform-apply
+        uses: canelkatmis/terraform-github-actions@v0.6.4
+        if: github.event.pull_request.title != 'terraform destroy'
+        with:
+          tf_actions_subcommand:  'apply'
+          tf_actions_version:     ${{ env.TF_ACTIONS_VERSION }}
+          tf_actions_working_dir: ${{ env.TF_ACTIONS_WORKING_DIR }}
+          tf_actions_cli_credentials_token: ${{ secrets.TF_ACTION_TFE_TOKEN }}
+          tf_actions_comment: true
+        env:
+          GITHUB_TOKEN:           ${{ secrets.GITHUB_TOKEN }}
+          AWS_ACCESS_KEY_ID:      ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY:  ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+
+      - name: terraform-outputs
+        uses: canelkatmis/terraform-github-actions@v0.6.4
+        if: github.event.pull_request.title != 'terraform destroy'
+        with:
+          tf_actions_subcommand:  'output'
+          tf_actions_version:     ${{ env.TF_ACTIONS_VERSION }}
+          tf_actions_working_dir: ${{ env.TF_ACTIONS_WORKING_DIR }}
+          tf_actions_cli_credentials_token: ${{ secrets.TF_ACTION_TFE_TOKEN }}
+        env:
+          GITHUB_TOKEN:           ${{ secrets.GITHUB_TOKEN }}
+          AWS_ACCESS_KEY_ID:      ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY:  ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+         
+      - name: terraform-destroy
+        uses: canelkatmis/terraform-github-actions@v0.6.4
+        if: github.event.pull_request.title == 'terraform destroy'
+        with:
+          tf_actions_subcommand:  'destroy'
+          tf_actions_version:     ${{ env.TF_ACTIONS_VERSION }}
+          tf_actions_working_dir: ${{ env.TF_ACTIONS_WORKING_DIR }}
+          tf_actions_cli_credentials_token: ${{ secrets.TF_ACTION_TFE_TOKEN }}
+        env:
+          GITHUB_TOKEN:           ${{ secrets.GITHUB_TOKEN }}
+          AWS_ACCESS_KEY_ID:      ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY:  ${{ secrets.AWS_SECRET_ACCESS_KEY }}
