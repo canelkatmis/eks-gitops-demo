@@ -55,7 +55,7 @@ jobs:
         aws-region: eu-central-1
 
     - name: Trigger deploy
-      uses: canelkatmis/kubernetes-action@v1
+      uses: canelkatmis/kubernetes-action@v2
       env:
         KUBE_CONFIG_DATA: ${{ secrets.KUBE_CONFIG_DATA }}
       with:
