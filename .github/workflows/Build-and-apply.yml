@@ -42,3 +42,13 @@ jobs:
         CLUSTER: terraform-eks-demo
       with:
         args: apply -f app/flask_service.yml
+
+    - name: Verify deployment
+      uses: canelkatmis/action-eks-kubectl@master
+      env:
+        AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        REGION: eu-central-1
+        CLUSTER: terraform-eks-demo
+      with:
+        args: rollout status deployment/hello-python
