@@ -27,7 +27,7 @@ jobs:
       env:
         REGISTRY: canelkatmis
         REPOSITORY: flaskapp
-        IMAGE_TAG: ${{ github.sha }}
+        IMAGE_TAG: latest
       run: |
         docker build -t $REGISTRY/$REPOSITORY:$IMAGE_TAG app/
         docker push $REGISTRY/$REPOSITORY:$IMAGE_TAG
