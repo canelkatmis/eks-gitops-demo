@@ -24,7 +24,7 @@ When a PR changes **app** folder, it will build this app, push to Docker HUB and
  DOCKER_PASS            #Docker HUB account password
  TF_ACTION_TFE_TOKEN    #Terraform Cloud Token
 
-- Create a dummy PR inside **infra** folder, confirm terraform plan outputs inside PR comments and merge it.
+- Create a dummy PR inside **infra** folder, confirm terraform plan outputs inside PR comments and merge it. Creating whole EKS infrastructure may take 10-15 minutes.
 
 - Go to TF Cloud, copy kubeconfig from output and insert to GitHub Secrets with the config name: KUBECONFIG
 
