@@ -1,13 +1,25 @@
 # eks-demo
-create a sample app and eks environment using github actions and terraform cloud with one click way
+Create your EKS environment and deploy apps to it while using only GitHub.
+
+GitOps as infra > create and update your whole EKS environment
+GitOps as app mgmt > build and deploy applications to EKS
 
 GitHub SCM > GitHub Actions > Terraform Cloud > AWS EKS > Apply application
 
-When a PR changes **infra** folder, it will (terraform) plan changes and output it to PR comments.
+Actions:
 
+
+When any PR that has changes **infra/** folder created, it will (terraform) plan changes and output it to PR comments.
 When a PR including **infra** change is merged, it will deploy latest changes to EKS infra.
-
 When a PR changes **app** folder, it will build the app, push to Docker HUB and deploy to EKS.
+
+|**Trigger**|**Path**|**Condition**|**Action**|
+|-|-|-|-|
+|Create PR|infra/|PR title is not 'terraform destroy'|terraform plan & output as PR comment|
+|Merge PR|infra/|PR title is not 'terraform destroy'|terraform apply|
+|Create PR|infra/|PR title is 'terraform destroy'|terraform plan -destroy & output as PR comment|
+|Merge PR|infra/|PR title is 'terraform destroy'|terraform destroy|
+|Push|app/| |build & push & deploy to EKS|
 
 ## Requirements
 - GitHub account
