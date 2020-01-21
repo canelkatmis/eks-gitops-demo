@@ -31,7 +31,7 @@ When a PR changes **app** folder, it will build the app, push to Docker HUB and 
 - Go to TF Cloud, copy kubeconfig from output and insert to GitHub Secrets with the config name: KUBECONFIG
 
 ## App deployment
-- Create a dummy PR inside **app** folder and merge it.
+- Push any changes to files including in **app** folder
 
 
 
