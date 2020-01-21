@@ -15,6 +15,8 @@ When a PR changes *app* folder, it will build this app, push to Docker HUB and d
 
 - Fork this repository
 
+- Create a workspace on Terraform Cloud, change it to manual execution mode and modify infra/variables.tf according to your organization and workspace name
+
 - Add below secrets to Github Secrets (settings>Secrets)
  AWS_ACCESS_KEY_ID      #AWS Account access key
  AWS_SECRET_ACCESS_KEY  #AWS Accoung secret key
@@ -23,13 +25,11 @@ When a PR changes *app* folder, it will build this app, push to Docker HUB and d
  TF_ACTION_TFE_TOKEN    #Terraform Cloud Token
 
 - Create a dummy PR inside *infra* folder, confirm terraform plan outputs inside PR comments and merge it.
-- kubeconfig
-- apply app
 
-## Usage
-- apply app
+- Go to TF Cloud, copy kubeconfig from output and insert to GitHub Secrets with the config name: KUBECONFIG
 
+## App deployment
+- Create a dummy PR inside *app* folder and merge it.
 
-### - Deployment
 
 
