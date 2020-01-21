@@ -6,7 +6,11 @@ app = Flask(__name__)
 def helloWorld():
     return 'Hello World!'
 
-@app.route('/health')
+@app.route('/alive')
+def return_ok():
+    return 'Ok!', 200
+
+ @app.route('/ready')
 def return_ok():
     return 'Ok!', 200
 
