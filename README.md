@@ -1,7 +1,7 @@
 # eks-demo
 create a sample app and eks environment using github actions and terraform cloud with one click way
 
-GitHub > Terraform Cloud > EKS
+GitHub SCM > GitHub Actions > Terraform Cloud > AWS EKS
 
 When a PR changes **infra** folder, it will (terraform) plan changes and output it to PR comments.
 When a PR including **infra** change is merged, it will deploy latest changes to EKS infra.
