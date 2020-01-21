@@ -34,7 +34,13 @@ spec:
         - containerPort: 800
         livenessProbe:
           httpGet:
-            path: /health
+            path: /alive
+            port: 800
+          initialDelaySeconds: 1
+          periodSeconds: 15
+        readinessProbe:
+          httpGet:
+            path: /ready
             port: 800
           initialDelaySeconds: 5
-          periodSeconds: 2
+          periodSeconds: 15
