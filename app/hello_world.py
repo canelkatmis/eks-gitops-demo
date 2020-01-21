@@ -7,11 +7,11 @@ def helloWorld():
     return 'Hello World!'
 
 @app.route('/alive')
-def return_ok():
+def alive():
     return 'Ok!', 200
 
  @app.route('/ready')
-def return_ok():
+def ready():
     return 'Ok!', 200
 
 app.run(host='0.0.0.0', port= 800)
