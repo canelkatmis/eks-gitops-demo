@@ -8,7 +8,7 @@ on:
       - closed
 env:
   TF_ACTIONS_VERSION: '0.12.18'
-  TF_ACTIONS_WORKING_DIR: './terraform'
+  TF_ACTIONS_WORKING_DIR: './infra'
 
 jobs:
   Apply-to-AWS:
