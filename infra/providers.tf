@@ -16,9 +16,9 @@ provider "http" {}
 terraform {
   backend "remote" {
     hostname     = "app.terraform.io"
-    organization =  var.tf-cloud-org
+    organization = "canelkatmis"
     workspaces {
-      name = var.tf-cloud-workspace
+      name = "eks-demo"
     }
   }
 }
