@@ -28,7 +28,7 @@ spec:
     spec:
       containers:
       - name: flaskapp
-        image: canelkatmis/flaskapp:1.0
+        image: canelkatmis/flaskapp:latest
         imagePullPolicy: IfNotPresent
         ports:
         - containerPort: 800
