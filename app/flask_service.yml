@@ -29,7 +29,7 @@ spec:
       containers:
       - name: flaskapp
         image: canelkatmis/flaskapp:latest
-        imagePullPolicy: IfNotPresent
+        imagePullPolicy: Always
         ports:
         - containerPort: 800
         livenessProbe:
