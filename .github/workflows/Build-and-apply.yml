@@ -33,16 +33,30 @@ jobs:
         docker push $REGISTRY/$REPOSITORY:$IMAGE_TAG
         echo "::set-output name=image::$REGISTRY/$REPOSITORY:$IMAGE_TAG"
 
-    - name: Deploy to EKS
-      uses: canelkatmis/kubectl@v1
-      env:
-        KUBE_CONFIG_DATA: ${{ secrets.KUBE_CONFIG_DATA }}
-      with:
-        args: apply -f app/flask_service.yml
+#     - name: Deploy to EKS
+#       uses: canelkatmis/kubectl@v1
+#       env:
+#         KUBE_CONFIG_DATA: ${{ secrets.KUBE_CONFIG_DATA }}
+#       with:
+#         args: apply -f app/flask_service.yml
 
-    - name: Verify deployment
-      uses: canelkatmis/kubectl@v1
+#     - name: Verify deployment
+#       uses: canelkatmis/kubectl@v1
+#       env:
+#         KUBE_CONFIG_DATA: ${{ secrets.KUBE_CONFIG_DATA }}
+#       with:
+#         args: '"rollout status deployment/hello-python"'
+
+    - name: Configure AWS Credentials
+      uses: aws-actions/configure-aws-credentials@v1
+      with:
+        aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        aws-region: eu-central-1
+
+    - name: Trigger deploy
+      uses: canelkatmis/kubernetes-action@v1
       env:
         KUBE_CONFIG_DATA: ${{ secrets.KUBE_CONFIG_DATA }}
       with:
-        args: '"rollout status deployment/hello-python"'
+        args: apply -f app/flask-service.yaml
