@@ -1,0 +1,35 @@
+on:
+  push:
+    branches:
+      - master
+    paths:
+    - 'app/**'
+
+name: Build app, push to docker hub and apply to eks
+
+jobs:
+  build:
+    name: Build and apply
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v1
+
+    - name: Login to Docker HUB
+      with:
+        DOCKER_USER: ${{ secrets.DOCKER_USER }}
+        DOCKER_PASS: ${{ secrets.DOCKER_PASS }}
+      run: |
+        docker login -u ${DOCKER_USER} -p ${DOCKER_PASS}
+
+    - name: Build and push image to Docker HUB
+      env:
+        REGISTRY: canelkatmis
+        REPOSITORY: flaskapp
+        IMAGE_TAG: ${{ github.sha }}
+      run: |
+        docker build -t $REGISTRY/$REPOSITORY:$IMAGE_TAG .
+        docker push $REGISTRY/$REPOSITORY:$IMAGE_TAG
+        echo "::set-output name=image::$REGISTRY/$REPOSITORY:$IMAGE_TAG"
+
