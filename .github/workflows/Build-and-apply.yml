@@ -18,14 +18,14 @@ jobs:
 
     - name: Login to Docker HUB
       env:
-        DOCKER_USER: canelkatmis
+        DOCKER_USER: ${{ secrets.DOCKER_USER }}
         DOCKER_PASS: ${{ secrets.DOCKER_PASS }}
       run: |
         docker login -u ${DOCKER_USER} -p ${DOCKER_PASS}
 
     - name: Build and push image to Docker HUB
       env:
-        REGISTRY: canelkatmis
+        REGISTRY: ${{ secrets.DOCKER_USER }}
         REPOSITORY: flaskapp
         IMAGE_TAG: latest
       run: |
@@ -33,35 +33,7 @@ jobs:
         docker push $REGISTRY/$REPOSITORY:$IMAGE_TAG
         echo "::set-output name=image::$REGISTRY/$REPOSITORY:$IMAGE_TAG"
 
-#     - name: Deploy to EKS
-#       uses: canelkatmis/kubectl@master
-#       env:
-#         KUBE_CONFIG_DATA: ${{ secrets.KUBE_CONFIG_DATA }}
-#       with:
-#         args: apply -f app/flask_service.yml
-
-#     - name: Verify deployment
-#       uses: canelkatmis/kubectl@master
-#       env:
-#         KUBE_CONFIG_DATA: ${{ secrets.KUBE_CONFIG_DATA }}
-#       with:
-#         args: '"rollout status deployment/hello-python"'
-
-#     - name: Configure AWS Credentials
-#       uses: aws-actions/configure-aws-credentials@v1
-#       with:
-#         aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-#         aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-#         aws-region: eu-central-1
-
-#     - name: Trigger deploy
-#       uses: canelkatmis/kubectl@v1
-#       env:
-#         KUBE_CONFIG_DATA: ${{ secrets.KUBE_CONFIG_DATA }}
-#       with:
-#         args: apply -f app/flask-service.yaml
-
-    - name: Deploy new version
+    - name: Deploy to EKS
       uses: canelkatmis/action-eks-kubectl@master
       env:
         AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
