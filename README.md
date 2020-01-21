@@ -1,11 +1,13 @@
 # eks-demo
 Create your EKS environment and deploy apps to it while using only GitHub.
 
-GitOps as infra > create and update your whole EKS environment
-
-GitOps as app mgmt > build and deploy applications to EKS
-
 GitHub SCM > GitHub Actions > Terraform Cloud > AWS EKS > Apply application
+
+
+*GitOps as infra > create and update your whole EKS environment*
+
+*GitOps as app mgmt > build and deploy applications to EKS*
+
 
 |**Trigger**|**Path**|**Condition**|**Action**|
 |-|-|-|-|
