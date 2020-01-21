@@ -4,8 +4,10 @@ create a sample app and eks environment using github actions and terraform cloud
 GitHub SCM > GitHub Actions > Terraform Cloud > AWS EKS
 
 When a PR changes **infra** folder, it will (terraform) plan changes and output it to PR comments.
+
 When a PR including **infra** change is merged, it will deploy latest changes to EKS infra.
-When a PR changes **app** folder, it will build this app, push to Docker HUB and deploy to EKS.
+
+When a PR changes **app** folder, it will build the app, push to Docker HUB and deploy to EKS.
 
 ## Requirements
 - AWS account including enough permissions and capability.
