@@ -20,11 +20,11 @@ When a PR changes **app** folder, it will build the app, push to Docker HUB and 
 - Create a workspace on Terraform Cloud, change it to manual execution mode and modify infra/variables.tf according to your organization and workspace name
 
 - Add below secrets to Github Secrets (settings>Secrets)
- AWS_ACCESS_KEY_ID      #AWS Account access key
- AWS_SECRET_ACCESS_KEY  #AWS Accoung secret key
- DOCKER_USER            #Docker HUB account username
- DOCKER_PASS            #Docker HUB account password
- TF_ACTION_TFE_TOKEN    #Terraform Cloud Token
+    - AWS_ACCESS_KEY_ID      #AWS Account access key
+    - AWS_SECRET_ACCESS_KEY  #AWS Accoung secret key
+    - DOCKER_USER            #Docker HUB account username
+    - DOCKER_PASS            #Docker HUB account password
+    - TF_ACTION_TFE_TOKEN    #Terraform Cloud Token
 
 - Create a dummy PR inside **infra** folder, confirm terraform plan outputs inside PR comments and merge it. Creating whole EKS infrastructure may take 10-15 minutes.
 
