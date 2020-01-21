@@ -21,11 +21,11 @@ spec:
     matchLabels:
       app: hello-python
   replicas: 2
-  strategy:
-    type: RollingUpdate
-    rollingUpdate:
-      maxSurge: 1
-      maxUnavailable: 1
+#   strategy:
+#     type: RollingUpdate
+#     rollingUpdate:
+#       maxSurge: 1
+#       maxUnavailable: 1
   template:
     metadata:
       labels:
