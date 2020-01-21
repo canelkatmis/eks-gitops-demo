@@ -18,7 +18,7 @@ terraform {
     hostname     = "app.terraform.io"
     organization =  var.tf-cloud-org
     workspaces {
-      name = var.tf-cloud-workspace
+      name       = var.tf-cloud-workspace
     }
   }
 }
