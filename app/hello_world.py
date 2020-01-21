@@ -10,7 +10,7 @@ def helloWorld():
 def alive():
     return 'Ok!', 200
 
- @app.route('/ready')
+@app.route('/ready')
 def ready():
     return 'Ok!', 200
 
