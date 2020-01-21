@@ -36,13 +36,13 @@ jobs:
     - name: Deploy to EKS
       uses: canelkatmis/kubectl@v1
       env:
-        KUBE_CONFIG_DATA: ${{ secrets.KUBECONFIG }}
+        KUBE_CONFIG_DATA: ${{ secrets.KUBE_CONFIG_DATA }}
       with:
         args: apply -f app/flask_service.yml
 
     - name: Verify deployment
       uses: canelkatmis/kubectl@v1
       env:
-        KUBE_CONFIG_DATA: ${{ secrets.KUBECONFIG }}
+        KUBE_CONFIG_DATA: ${{ secrets.KUBE_CONFIG_DATA }}
       with:
         args: '"rollout status deployment/hello-python"'
