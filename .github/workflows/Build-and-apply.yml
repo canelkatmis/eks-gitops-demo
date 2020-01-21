@@ -17,7 +17,7 @@ jobs:
       uses: actions/checkout@v1
 
     - name: Login to Docker HUB
-      with:
+      env:
         DOCKER_USER: ${{ secrets.DOCKER_USER }}
         DOCKER_PASS: ${{ secrets.DOCKER_PASS }}
       run: |
