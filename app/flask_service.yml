@@ -29,12 +29,12 @@ spec:
       containers:
       - name: flaskapp
         image: canelkatmis/flaskapp:latest
-        imagePullPolicy: IfNotPresent
+        imagePullPolicy: Always
         ports:
         - containerPort: 800
         livenessProbe:
           httpGet:
             path: /health
-            port: 80
+            port: 800
           initialDelaySeconds: 5
           periodSeconds: 2
