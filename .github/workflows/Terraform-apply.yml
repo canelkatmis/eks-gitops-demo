@@ -39,7 +39,7 @@ jobs:
           tf_actions_version:     ${{ env.TF_ACTIONS_VERSION }}
           tf_actions_working_dir: ${{ env.TF_ACTIONS_WORKING_DIR }}
           tf_actions_cli_credentials_token: ${{ secrets.TF_ACTION_TFE_TOKEN }}
-          tf_actions_comment: true
+          tf_actions_comment: false
         env:
           GITHUB_TOKEN:           ${{ secrets.GITHUB_TOKEN }}
           AWS_ACCESS_KEY_ID:      ${{ secrets.AWS_ACCESS_KEY_ID }}
