@@ -1,2 +1,35 @@
 # eks-demo
 create a sample app and eks environment using github actions and terraform cloud with one click way
+
+GitHub > Terraform Cloud > EKS
+
+When a PR changes *infra* folder, it will (terraform) plan changes and output it to PR comments.
+When a PR including *infra* change is merged, it will deploy latest changes to EKS infra.
+When a PR changes *app* folder, it will build this app, push to Docker HUB and deploy to EKS.
+
+## Requirements
+- AWS account including enough permissions and capability.
+- Terraform Cloud account
+
+## Installation
+
+- Fork this repository
+
+- Add below secrets to Github Secrets (settings>Secrets)
+ AWS_ACCESS_KEY_ID      #AWS Account access key
+ AWS_SECRET_ACCESS_KEY  #AWS Accoung secret key
+ DOCKER_USER            #Docker HUB account username
+ DOCKER_PASS            #Docker HUB account password
+ TF_ACTION_TFE_TOKEN    #Terraform Cloud Token
+
+- Create a dummy PR inside *infra* folder, confirm terraform plan outputs inside PR comments and merge it.
+- kubeconfig
+- apply app
+
+## Usage
+- apply app
+
+
+### - Deployment
+
+
