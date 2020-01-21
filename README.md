@@ -3,9 +3,9 @@ create a sample app and eks environment using github actions and terraform cloud
 
 GitHub > Terraform Cloud > EKS
 
-When a PR changes *infra* folder, it will (terraform) plan changes and output it to PR comments.
-When a PR including *infra* change is merged, it will deploy latest changes to EKS infra.
-When a PR changes *app* folder, it will build this app, push to Docker HUB and deploy to EKS.
+When a PR changes **infra** folder, it will (terraform) plan changes and output it to PR comments.
+When a PR including **infra** change is merged, it will deploy latest changes to EKS infra.
+When a PR changes **app** folder, it will build this app, push to Docker HUB and deploy to EKS.
 
 ## Requirements
 - AWS account including enough permissions and capability.
@@ -24,12 +24,12 @@ When a PR changes *app* folder, it will build this app, push to Docker HUB and d
  DOCKER_PASS            #Docker HUB account password
  TF_ACTION_TFE_TOKEN    #Terraform Cloud Token
 
-- Create a dummy PR inside *infra* folder, confirm terraform plan outputs inside PR comments and merge it.
+- Create a dummy PR inside **infra** folder, confirm terraform plan outputs inside PR comments and merge it.
 
 - Go to TF Cloud, copy kubeconfig from output and insert to GitHub Secrets with the config name: KUBECONFIG
 
 ## App deployment
-- Create a dummy PR inside *app* folder and merge it.
+- Create a dummy PR inside **app** folder and merge it.
 
 
 
