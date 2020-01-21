@@ -34,14 +34,14 @@ jobs:
         echo "::set-output name=image::$REGISTRY/$REPOSITORY:$IMAGE_TAG"
 
     - name: Deploy to EKS
-      uses: canelkatmis/kubectl@v1.0
+      uses: canelkatmis/kubectl@v1
       env:
         KUBECONFIG: ${{ secrets.KUBECONFIG }}
       with:
         args: apply -f app/flask_service.yml
 
     - name: Verify deployment
-      uses: canelkatmis/kubectl@v1.0
+      uses: canelkatmis/kubectl@v1
       env:
         KUBECONFIG: ${{ secrets.KUBECONFIG }}
       with:
