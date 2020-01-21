@@ -3,7 +3,7 @@ name: Terraform-Apply
 on:
   pull_request:
     paths:
-    - 'terraform/**'
+    - 'infra/**'
     types:
       - closed
 env:
