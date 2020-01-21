@@ -38,5 +38,6 @@ GitHub SCM > GitHub Actions > Terraform Cloud > AWS EKS > Apply application
 ## App deployment
 - Push any changes to files including in **app** folder
 
-
-
+### How to manage EKS from another client?
+- Install kubectl, aws-iam-authenticator and awscli to any supported OS
+- Update kubeconfig via `aws eks --region eu-central-1 update-kubeconfig --name terraform-eks-demo`
