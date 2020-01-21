@@ -7,3 +7,12 @@ variable "cluster-name" {
   type    = string
 }
 
+variable "tf-cloud-org" {
+  default = "canelkatmis"
+  type    = string
+}
+
+variable "tf-cloud-workspace" {
+  default = "eks-demo"
+  type    = string
+}
