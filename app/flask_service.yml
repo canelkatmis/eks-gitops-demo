@@ -21,6 +21,8 @@ spec:
     matchLabels:
       app: hello-python
   replicas: 2
+  strategy:
+    type: RollingUpdate
   template:
     metadata:
       labels:
