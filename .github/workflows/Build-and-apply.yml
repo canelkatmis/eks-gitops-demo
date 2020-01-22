@@ -5,11 +5,11 @@ on:
     paths:
     - 'app/**'
 
-name: Build app, push to docker hub and apply to eks
+name: Build & Push & Deploy
 
 jobs:
   build:
-    name: Build and apply
+    name: Build & Push & Deploy
     runs-on: ubuntu-latest
 
     steps:
