@@ -23,15 +23,17 @@ jobs:
       run: |
         docker login -u ${DOCKER_USER} -p ${DOCKER_PASS}
 
-    - name: Build and push image to Docker HUB
+    - name: Build each app and push images to Docker HUB
       env:
         REGISTRY: ${{ secrets.DOCKER_USER }}
         REPOSITORY: flaskapp
         IMAGE_TAG: latest
       run: |
-        docker build -t $REGISTRY/$REPOSITORY:$IMAGE_TAG app/
-        docker push $REGISTRY/$REPOSITORY:$IMAGE_TAG
-        echo "::set-output name=image::$REGISTRY/$REPOSITORY:$IMAGE_TAG"
+        for apps in `ls app/`;
+        do
+          docker build -t $REGISTRY/$apps:$IMAGE_TAG app/$apps
+          docker push $REGISTRY/$apps:$IMAGE_TAG
+        done
 
     - name: Deploy to EKS
       uses: canelkatmis/action-eks-kubectl@master
