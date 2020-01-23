@@ -31,8 +31,10 @@ jobs:
       run: |
         for apps in `ls app/`;
         do
-          docker build -t $REGISTRY/$apps:$IMAGE_TAG app/$apps/docker/
-          docker push $REGISTRY/$apps:$IMAGE_TAG
+          if [ -d "app/$apps/docker/" ]; then
+            docker build -t $REGISTRY/$apps:$IMAGE_TAG app/$apps/docker/
+            docker push $REGISTRY/$apps:$IMAGE_TAG
+          fi
         done
 
     - name: Deploy to EKS
