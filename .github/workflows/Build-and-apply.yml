@@ -31,7 +31,7 @@ jobs:
       run: |
         for apps in `ls app/`;
         do
-          docker build -t $REGISTRY/$apps:$IMAGE_TAG app/$apps
+          docker build -t $REGISTRY/$apps:$IMAGE_TAG app/$apps/docker/
           docker push $REGISTRY/$apps:$IMAGE_TAG
         done
 
