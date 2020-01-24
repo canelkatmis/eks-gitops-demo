@@ -28,10 +28,10 @@ jobs:
         REGISTRY: ${{ secrets.DOCKER_USER }}
         IMAGE_TAG: latest
       run: |
-        for apps in `ls app/`;
+        for apps in `ls app/docker/`;
         do
-          if [ -d "app/$apps/docker/" ]; then
-            docker build -t $REGISTRY/$apps:$IMAGE_TAG app/$apps/docker/
+          if [ -d "app/docker/$apps/" ]; then
+            docker build -t $REGISTRY/$apps:$IMAGE_TAG app/docker/$apps/
             docker push $REGISTRY/$apps:$IMAGE_TAG
           fi
         done
