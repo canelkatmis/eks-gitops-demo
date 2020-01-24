@@ -54,7 +54,7 @@ jobs:
         REGION: eu-central-1
         CLUSTER: terraform-eks-demo
       with:
-        args: get deploy --output name | xargs -n1 kubectl rollout status
+        args: "get deploy --output name | xargs -n1 kubectl rollout status"
 
     - name: Show services
       uses: canelkatmis/action-eks-kubectl@master
