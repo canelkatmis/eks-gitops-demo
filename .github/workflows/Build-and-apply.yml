@@ -52,10 +52,10 @@ jobs:
         AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         REGION: eu-central-1
         CLUSTER: terraform-eks-demo
-     run: |
-       export PATH=$PATH:/usr/local/bin/kubectl:/usr/local/bin/aws-iam-authenticator:/usr/local/bin/aws
-       aws eks --region $REGION update-kubeconfig --name $CLUSTER
-       kubectl get deploy --output name | xargs -n1 -t kubectl rollout status
+      run: |
+        export PATH=$PATH:/usr/local/bin/kubectl:/usr/local/bin/aws-iam-authenticator:/usr/local/bin/aws
+        aws eks --region $REGION update-kubeconfig --name $CLUSTER
+        kubectl get deploy --output name | xargs -n1 -t kubectl rollout status
 
     - name: Verify deployments
       uses: canelkatmis/action-eks-kubectl@master
