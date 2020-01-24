@@ -44,7 +44,7 @@ jobs:
         REGION: eu-central-1
         CLUSTER: terraform-eks-demo
       with:
-        args: apply -f app/kubernetes/*.yml
+        args: apply -f app/kubernetes/
 
     - name: Verify deployments
       uses: canelkatmis/action-eks-kubectl@master
