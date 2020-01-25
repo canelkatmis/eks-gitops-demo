@@ -8,6 +8,9 @@ GitHub SCM > GitHub Actions > Terraform Cloud > AWS EKS > Apply application
 
 *GitOps as app mgmt > build and deploy applications to EKS*
 
+No 3rd party tools
+No webhook
+
 
 |**Trigger**|**Path**|**Condition**|**Action**|
 |-|-|-|-|
