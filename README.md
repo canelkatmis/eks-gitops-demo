@@ -14,9 +14,9 @@ GitHub SCM > GitHub Actions > Terraform Cloud > AWS EKS > Deploy apps
 
 |**Trigger**|**Path**|**Condition**|**Action**|
 |-|-|-|-|
-|Create PR|infra/|PR title is not 'terraform destroy'|terraform plan & output as PR comment|
+|Create PR|infra/|PR title is not 'terraform destroy'|terraform plan|
 |Merge PR|infra/|PR title is not 'terraform destroy'|terraform apply|
-|Create PR|infra/|PR title is 'terraform destroy'|terraform plan -destroy & output as PR comment|
+|Create PR|infra/|PR title is 'terraform destroy'|terraform plan -destroy|
 |Merge PR|infra/|PR title is 'terraform destroy'|terraform destroy|
 |Push|app/| |build & push to docker hub & deploy to eks|
 
