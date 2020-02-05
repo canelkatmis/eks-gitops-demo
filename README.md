@@ -6,7 +6,7 @@ GitHub SCM > GitHub Actions > Terraform Cloud > AWS EKS > Deploy apps
 
 *GitOps for infra > create and update your whole EKS environment*
 
-*GitOps for app mgmt > build and deploy applications to EKS*
+*GitOps for app > build and deploy applications to EKS*
 
 - No 3rd party tools
 - No webhook
