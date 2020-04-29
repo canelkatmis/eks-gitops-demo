@@ -24,6 +24,7 @@ GitHub SCM > GitHub Actions > Terraform Cloud > AWS EKS > Deploy apps
 - GitHub account
 - AWS account including enough permission and capability.
 - Terraform Cloud account
+- Docker Hub account
 
 ## Installation
 
