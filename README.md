@@ -11,6 +11,7 @@ GitHub SCM > GitHub Actions > Terraform Cloud > AWS EKS > Deploy apps
 - No 3rd party tools
 - No webhook
 
+![Pipeline](pipeline.jpeg)
 
 |**Trigger**|**Path**|**Condition**|**Action**|
 |-|-|-|-|
