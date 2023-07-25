@@ -6,10 +6,25 @@ on:
       - master
 
 jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: build for ddd
+        run: |
+            echo "built"
+            
   deployment:
     runs-on: ubuntu-latest
     environment: ddd
     steps:
+    
       - name: deploy to ddd
         run: |
             echo "deployed"
+
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: test for ddd
+        run: |
+            echo "tested"
