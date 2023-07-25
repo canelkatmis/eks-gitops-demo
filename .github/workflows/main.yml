@@ -1,0 +1,15 @@
+name: deptest
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  deployment:
+    runs-on: ubuntu-latest
+    environment: ddd
+    steps:
+      - name: deploy to ddd
+        run: |
+            echo "deployed"
