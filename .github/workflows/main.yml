@@ -24,6 +24,7 @@ jobs:
   rollback-test:
     runs-on: ubuntu-latest
     needs: deployment-test
+    environment: test
     steps:
       - name: Rollback test env
         run: |
@@ -32,6 +33,7 @@ jobs:
   deployment-prod:
     runs-on: ubuntu-latest
     needs: deployment-test
+    environment: prod
     steps:
       - name: Deploy to prod env
         run: |
@@ -40,6 +42,7 @@ jobs:
   rollback-prod:
     runs-on: ubuntu-latest
     needs: deployment-prod
+    environment: prod
     steps:
       - name: Rollback prod env
         run: |
