@@ -9,23 +9,38 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - name: build for ddd
+      - name: Docker build
         run: |
             echo "built"
             
-  deployment:
+  deployment-test:
     runs-on: ubuntu-latest
-    environment: ddd
+    environment: test
     steps:
-    
-      - name: deploy to ddd
+      - name: Deploy to test env
         run: |
-            echo "deployed"
+            echo "deployed to test"
 
-  test:
+  rollback-test:
     runs-on: ubuntu-latest
-    needs: deployment
+    needs: deployment-test
     steps:
-      - name: test for ddd
+      - name: Rollback test env
         run: |
-            echo "tested"
+            echo "rolled back from prod"
+
+  deployment-prod:
+    runs-on: ubuntu-latest
+    needs: deployment-test
+    steps:
+      - name: Deploy to prod env
+        run: |
+            echo "deployed to prod"
+
+  rollback-prod:
+    runs-on: ubuntu-latest
+    needs: deployment-prod
+    steps:
+      - name: Rollback prod env
+        run: |
+            echo "rolled back from prod"
